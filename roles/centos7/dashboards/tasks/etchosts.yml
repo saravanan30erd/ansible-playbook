@@ -3,11 +3,11 @@
   blockinfile:
     dest: /etc/hosts
     block: |-
-      {% for item in groups['os-cluster'] %}
+      {% for item in groups['dashboards'] %}
       {{ hostvars[item]['ip'] }} {{ item }}.{{ domain_name }} {{ item }}
       {% endfor %}
     state: present
     create: yes
     backup: yes
-    marker: "# Ansible inventory hosts {mark}"
+    marker: "# Ansible dashboards inventory hosts {mark}"
   when: populate_inventory_to_hosts_file

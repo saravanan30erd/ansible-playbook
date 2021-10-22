@@ -9,5 +9,5 @@
     state: present
     create: yes
     backup: yes
-    marker: "# Ansible inventory hosts {mark}"
+    marker: "# Ansible opensearch inventory hosts {mark}"
   when: populate_inventory_to_hosts_file
