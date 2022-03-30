@@ -25,6 +25,14 @@
   command: chdir=/tmp/ tar -xvzf opensearch-dashboards.tar.gz -C "{{ os_dashboards_home }}" --strip-components=1
   when: download.changed
 
+- name: Dashboards Install | Set files and folders permission
+  file:
+    dest: "{{ os_dashboards_home }}"
+    owner: "{{ os_dashboards_user }}"
+    group: "{{ os_dashboards_user }}"
+    mode: u=rwX,g=rX,o=rX
+    recurse: yes
+
 - name: Dashboards Install | Copy Configuration File
   template:
     src: opensearch_dashboards.yml

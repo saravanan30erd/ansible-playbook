@@ -25,6 +25,14 @@
   command: chdir=/tmp/ tar -xvzf opensearch.tar.gz -C "{{ os_home }}" --strip-components=1
   when: download.changed
 
+- name: OpenSearch Install | Set files and folders permission
+  file:
+    dest: "{{ os_home }}"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: u=rwX,g=rX,o=rX
+    recurse: yes
+
 - name: OpenSearch Install | Copy Configuration File
   template:
     src: "opensearch-{{ cluster_type }}.yml"

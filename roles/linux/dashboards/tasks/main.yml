@@ -9,6 +9,13 @@
     state: disabled
   when: (ansible_distribution != "Ubuntu") and (ansible_distribution != "Amazon")
 
+# Install tar command only for Oracle Linux as its available default for other distros.
+- name: Install tar command
+  yum:
+    name: tar
+    state: latest
+  when: (ansible_distribution == "OracleLinux")
+
 - name: Populate the nodes to /etc/hosts
   import_tasks: etchosts.yml
 
